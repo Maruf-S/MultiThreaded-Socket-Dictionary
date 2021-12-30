@@ -190,18 +190,6 @@ public class ClientUI {
 		frame.getContentPane().add(panel1, new java.awt.GridBagConstraints());
 		panel1.getAccessibleContext().setAccessibleDescription("");
 
-		panel2.setBackground(new java.awt.Color(153, 153, 153));
-		panel2.setPreferredSize(new java.awt.Dimension(100, 300));
-		btnAdd.setBackground(new java.awt.Color(50, 110, 100));
-		btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-		btnAdd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-		btnAdd.setText("ADD");
-		btnAdd.setMaximumSize(new java.awt.Dimension(100, 100));
-		btnAdd.setMinimumSize(new java.awt.Dimension(40, 40));
-		btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
-		btnAdd.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-		panel2.add(btnAdd);
-
 		btnQuery.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
 		btnQuery.setLabel("QUERY");
 		btnQuery.setBackground(new java.awt.Color(50, 50, 110));
@@ -213,6 +201,20 @@ public class ClientUI {
 		btnQuery.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 		panel2.add(btnQuery);
 		btnQuery.getAccessibleContext().setAccessibleName("query");
+
+
+
+		panel2.setBackground(new java.awt.Color(153, 153, 153));
+		panel2.setPreferredSize(new java.awt.Dimension(100, 300));
+		btnAdd.setBackground(new java.awt.Color(50, 110, 100));
+		btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+		btnAdd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+		btnAdd.setText("ADD");
+		btnAdd.setMaximumSize(new java.awt.Dimension(100, 100));
+		btnAdd.setMinimumSize(new java.awt.Dimension(40, 40));
+		btnAdd.setPreferredSize(new java.awt.Dimension(85, 30));
+		btnAdd.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+		panel2.add(btnAdd);
 
 		btnRemove.setBackground(new java.awt.Color(100, 50, 50));
 		btnRemove.setForeground(new java.awt.Color(255, 255, 255));
