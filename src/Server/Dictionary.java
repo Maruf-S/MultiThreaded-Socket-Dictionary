@@ -12,96 +12,43 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class Dictionary {
-	private String path = "dictionary.dat";
-	private HashMap<String, String> dictMap;
+	private String path = "db.db";
+	Database database ;
 	
-	public Dictionary(String p) {
-		path = p;
-		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
-			dictMap = (HashMap<String, String>) ois.readObject();
-			ois.close();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error: Wrong file format! Run default dictionary.");
-			setDefaultDict();
-		} catch (FileNotFoundException e) {
-			System.out.println("Error: No such file! Run default dictionary.");
-			setDefaultDict();
-		} catch (Exception e) {
-			System.out.println("Error: Unknown error, " + e.getMessage());
-			e.printStackTrace();
-		}
+	public Dictionary(String path) {
+		this.path = path;
+		database = Database.getInstance(path);
+	}
+	public Dictionary(){
+
 	}
 	
 	public String getPath() {
 		return path;
 	}
-	
-	private void setDefaultDict() {
-		path = "dictionary.dat";
-		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
-			dictMap = (HashMap<String, String>) ois.readObject();
-			ois.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Default Dictionary not Exist, Create a new one.");
-			createNewDict(this.path);
-		} catch (Exception e) {
-			System.out.println("Error: Unknown error, " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	private void createNewDict(String dictPath) {
-		dictMap = new HashMap<String, String>();
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dictPath));
-			oos.writeObject(dictMap);
-			oos.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public Dictionary() {
-		path = "";
-		dictMap = new HashMap<String, String>();
-	}
+
 	
 	public synchronized boolean isWordExist(String word) {
-		return dictMap.containsKey(word);
+		Word found  =  database.getWord(word);
+		return found != null;
 	}
 	
-	public synchronized String query(String word) {
-		return dictMap.get(word);
+	public synchronized Word query(String word) {
+		return  database.getWord(word);
 	}
 	
-	public synchronized boolean add(String word, String meaning) {
-		if (dictMap.containsKey(word)) {
+	public synchronized boolean add(String word, String definition) {
+		if (isWordExist(word)) {
 			return false;
 		} else {
-			dictMap.put(word, meaning);
-			try {
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
-				oos.writeObject(dictMap);
-				oos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			database.insert(word,definition,"");
 			return true;
 		}
 	}
 	
 	public synchronized boolean remove(String word) {
-		if (dictMap.containsKey(word)) {
-			dictMap.remove(word);
-			try {
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
-				oos.writeObject(dictMap);
-				oos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (isWordExist(word)) {
+			database.delete(word);
 			return true;
 		} else {
 			return false;

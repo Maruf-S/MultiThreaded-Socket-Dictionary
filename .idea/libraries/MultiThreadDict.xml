@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="MultiThreadDict">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/DictionaryServer.jar!/" />
+      <root url="jar://$PROJECT_DIR$/DictionaryClient.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

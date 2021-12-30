@@ -8,12 +8,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.util.concurrent.TimeoutException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import StateCode.StateCode;
+import States.States;
 
 public class ExecuteThread extends Thread {
 	private int state;
@@ -51,7 +50,7 @@ public class ExecuteThread extends Thread {
 	public ExecuteThread(String address, int port, int command, String word, String meaning) {
 		this.address = address;
 		this.port = port;
-		this.state = StateCode.FAIL;
+		this.state = States.FAIL;
 		this.command = command;
 		this.word = word;
 		this.meaning = meaning;
@@ -69,25 +68,25 @@ public class ExecuteThread extends Thread {
 			String res = reader.readUTF();
 			JSONObject resJSON = parseResString(res);
 			state = Integer.parseInt(resJSON.get("state").toString());
-			if (state == StateCode.SUCCESS) {
+			if (state == States.SUCCESS) {
 				meaning = (String) resJSON.get("meaning");
 			}
 			reader.close();
 			writer.close();	
 		} catch (UnknownHostException e) {
-			state = StateCode.UNKNOWN_HOST;
+			state = States.UNKNOWN_HOST;
 			System.out.println("Error: UNKNOWN HOST!");
 		} catch (ConnectException e) {
-			state = StateCode.COLLECTIONG_REFUSED;
+			state = States.COLLECTIONG_REFUSED;
 			System.out.println("Error: COLLECTIONG REFUSED!");
 		} catch (SocketTimeoutException e) {
-			state = StateCode.TIMEOUT;
+			state = States.TIMEOUT;
 			System.out.println("Timeoutr!");
 		} catch (SocketException e) {
-			state = StateCode.IO_ERROR;
+			state = States.IO_ERROR;
 			System.out.println("Error: I/O ERROR!");
 		} catch (IOException e) {
-			state = StateCode.IO_ERROR;
+			state = States.IO_ERROR;
 			System.out.println("Error: I/O ERROR!");
 		} catch (Exception e) {
 			e.printStackTrace();

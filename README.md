@@ -18,5 +18,3 @@ Java -jar DictionaryClient.jar <server-address> <server-port>
 ## More Detail
 If you want to learn more detail of this simple application, please read the report.pdf.
 
-## Warning
-This repository is for reference only. Learn from it when you are concerned about the assignment. **Please do not copy all the code for submission.**
